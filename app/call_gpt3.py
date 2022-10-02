@@ -1,6 +1,5 @@
 import argparse
 import os
-from subprocess import call
 import openai
 import argparse
 import re
