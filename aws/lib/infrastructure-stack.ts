@@ -6,7 +6,7 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
-export class CopykittInfraStack extends Stack {
+export class copyAiInfraStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
@@ -18,7 +18,7 @@ export class CopykittInfraStack extends Stack {
     const apiLambda = new lambda.Function(this, "ApiFunction", {
       runtime: lambda.Runtime.PYTHON_3_9,
       code: lambda.Code.fromAsset("../app/"),
-      handler: "copykitt_api.handler",
+      handler: "copyAi_api.handler",
       layers: [layer],
       environment: {
         OPENAI_API_KEY: process.env.OPENAI_API_KEY ?? "",
@@ -26,7 +26,7 @@ export class CopykittInfraStack extends Stack {
     });
 
     const copyAPI = new apiGateway.RestApi(this, "RestApi", {
-      restApiName: "CopyKitt Tutorial API",
+      restApiName: "copyAi API",
     });
 
     copyAPI.root.addProxy({
